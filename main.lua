@@ -61,12 +61,12 @@ function player_vs_bot() -- Function to fight a bot (single player mode)
 end
 
 function player_vs_player()
-  io.write("Player 1, pick rock, paper, or scissors.")
+  io.write("Player 1, pick rock, paper, or scissors.\n")
   local p1 = string.lower(io.read())
   check_selection(p1) -- Check if p1's input was rock, paper, or scissors and return an error message if not
   
   -- Function to check the OS of the user so we can write the appropriate command for clearing the terminal
-  function check_OS()
+  function clear()
     
     --[[
     The package library helps us load and build modules in Lua.
@@ -92,39 +92,38 @@ function player_vs_player()
     
     -- If else (the directory separator wasn't found)
     else
-      print("Directory separator not found") -- Print an error message
+      print("Error: directory separator not found.") -- Print an error message
       return -- End the script by returning nil
     end
-    
-    os.execute(check_OS()) -- Clear the terminal via the os library using the appropriate clear command for the user's OS
-    
-    io.write("Player 2, pick rock, paper, or scissors")
-    local p2 = string.lower(io.read())
-    check_selection(p2) -- Check if p2's input was rock, paper, or scissors and return an error message if not
-  
-    
-    -- Create a local variable that tracks all the ways p2 can lose
-    local p2_loss = -- If any of these conditions are true, loss = true
-    (p1 == "rock" and p2 == "scissors") -- If bot picks rock and you pick scissors
-    or (p1 == "paper" and p2 == "rock") -- If bot picks paper and you pick rock
-    or (p1 == "scissors" and p2 == "paper") -- If bot picks scissors and you pick paper
-    
-    -- If both player and bot pick the same thing
-    if p1 == p2 then
-      print("It's a tie! Both players picked " .. p1 .. ".")
-      
-    -- If p2 loses (if loss is true)
-    elseif loss then
-      print("P1 wins and P2 loses! P1 picked " .. p1 .. " and P2 picked " .. p2 ".") -- Print a win message for p1/loss message for p2
-      
-    -- If else (this is automatically a win for p2 since we handled any invalid inputs before)
-    else
-      print("P2 wins and P1 loses! P2 picked " .. p2 .. " and P1 picked " .. p1 ".") -- Print a win message for p2/loss message for p1
-    end 
-    
   end
-end
+    
+  os.execute(clear()) -- Clear the terminal via the os library using the appropriate clear command for the user's OS
+    
+  io.write("Player 2, pick rock, paper, or scissors\n")
+  local p2 = string.lower(io.read())
+  check_selection(p2) -- Check if p2's input was rock, paper, or scissors and return an error message if not
 
+  -- Create a local variable that tracks all the ways p2 can lose
+  local p2_loss = -- If any of these conditions are true, loss = true
+  (p1 == "rock" and p2 == "scissors") -- If bot picks rock and you pick scissors
+  or (p1 == "paper" and p2 == "rock") -- If bot picks paper and you pick rock
+  or (p1 == "scissors" and p2 == "paper") -- If bot picks scissors and you pick paper
+
+  -- If both player and bot pick the same thing
+  if p1 == p2 then
+    print("It's a tie! Both players picked " .. p1 .. ".")
+ 
+  -- If p2 loses (if loss is true)
+  elseif loss then
+    print("P1 wins and P2 loses! P1 picked " .. p1 .. " and P2 picked " .. p2 ".") -- Print a win message for p1/loss message for p2
+      
+  -- If else (this is automatically a win for p2 since we handled any invalid inputs before)
+  else
+    print("P2 wins and P1 loses! P2 picked " .. p2 .. " and P1 picked " .. p1 ".") -- Print a win message for p2/loss message for p1
+  end 
+    
+  return -- End the script by returning nil
+end
 
 -- If the response as a lowercase is "pvp"
 if string.lower(mode) == "pvp" then
