@@ -119,7 +119,7 @@ function player_vs_player()
       
   -- If else (this is automatically a win for p2 since we handled any invalid inputs before)
   else
-    print("P2 wins and P1 loses! P2 picked " .. p2 .. " and P1 picked " .. p1 ".") -- Print a win message for p2/loss message for p1
+    print("P2 wins and P1 loses! P2 picked " .. p2 .. " and P1 picked " .. p1 .. ".") -- Print a win message for p2/loss message for p1
   end 
     
   return -- End the script by returning nil
